@@ -1,0 +1,44 @@
+#include <stdio.h>
+
+int main() {
+    int n, i, j;
+    float bin[10], item[10], cap;
+
+    printf("Enter no. of items: ");
+    scanf("%d", &n);
+
+    printf("Enter bin capacity: ");
+    scanf("%f", &cap);
+
+    for (i = 0; i < n; i++) {
+        printf("Enter size of item %d: ", i + 1);
+        scanf("%f", &item[i]);
+    }
+
+    // Logic continued from handwriting:
+    // Initialize bins with their full capacity
+    int binCount = 0;
+    for (i = 0; i < 10; i++) {
+        bin[i] = cap;
+    }
+
+    // First-Fit logic
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < 10; j++) {
+            if (bin[j] >= item[i]) {
+                bin[j] = bin[j] - item[i];
+                break;
+            }
+        }
+    }
+
+    // Display remaining space in bins
+    printf("\nRemaining space in used bins:\n");
+    for (i = 0; i < 10; i++) {
+        if (bin[i] != cap) {
+            printf("Bin %d: %.2f\n", i + 1, bin[i]);
+        }
+    }
+
+    return 0;
+}
